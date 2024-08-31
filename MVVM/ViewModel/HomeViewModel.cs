@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfApp1.Core;
 using System.Threading;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace WpfApp1.MVVM.ViewModel
 {
@@ -15,26 +13,29 @@ namespace WpfApp1.MVVM.ViewModel
     {
         public RelayCommand InstallTS { get; set; }
 
-
         public HomeViewModel()
         {
-            InstallTS = new RelayCommand(o =>
+            InstallTS = new RelayCommand(async o =>
             {
-                // Extract and save Program1.exe
-                ExtractResource("WpfApp1.Installers.Program1.exe", "Program1.exe");
+                string tsURL = "https://files.teamspeak-services.com/pre_releases/client/5.0.0-beta77/teamspeak-client.msi";
+                string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string destinationFilePath = Path.Combine(currentDirectory, "teamspeak-client.msi");
+
+                await Download(tsURL, destinationFilePath);
+
+                RunProgram(destinationFilePath);
 
                 // Extract and save Program2.exe
                 ExtractResource("WpfApp1.Installers.Program2.ts3_plugin", "Program2.ts3_plugin");
 
                 // Run the extracted programs
-                RunProgram("Program1.exe");
-
                 Console.WriteLine("Waiting 5 seconds");
                 Thread.Sleep(5000); // Pause for 5000 milliseconds (5 seconds)
 
                 OpenFileWithDefaultApplication("Program2.ts3_plugin");
 
                 Console.WriteLine("Complete");
+
             });
         }
 
@@ -67,6 +68,32 @@ namespace WpfApp1.MVVM.ViewModel
             process.StartInfo.UseShellExecute = true;
             process.Start();
             process.WaitForExit();  // Wait for the process to exit
+        }
+
+        public async Task Download(string fileURL, string destinationPath)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    // Send a request to download the file
+                    HttpResponseMessage response = await client.GetAsync(fileURL);
+                    response.EnsureSuccessStatusCode(); // Throw an exception if the HTTP request fails
+
+                    // Read the response content as a stream
+                    using (Stream contentStream = await response.Content.ReadAsStreamAsync(),
+                          fileStream = new FileStream(destinationPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true))
+                    {
+                        await contentStream.CopyToAsync(fileStream);
+                    }
+
+                    Console.WriteLine("File downloaded successfully to " + destinationPath);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+            }
         }
     }
 }
