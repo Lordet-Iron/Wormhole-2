@@ -28,7 +28,7 @@
     <InstallUrl>https://github.com/Lordet-Iron/Wormhole-2/releases/download/Main/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -157,9 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Wormhole.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Installers\Program1.exe" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
