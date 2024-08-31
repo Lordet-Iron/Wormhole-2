@@ -3,3 +3,4 @@
 *.deploy binary
 publish/Application[[:space:]]Files/WpfApp1_1_0_0_0/WpfApp1.exe.deploy filter=lfs diff=lfs merge=lfs -text
 Installers/Program1.exe filter=lfs diff=lfs merge=lfs -text
+publish/Application[[:space:]]Files/WpfApp1_1_0_0_6/WpfApp1.exe.deploy filter=lfs diff=lfs merge=lfs -text
