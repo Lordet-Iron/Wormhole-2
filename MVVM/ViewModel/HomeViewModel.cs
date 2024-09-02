@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace WpfApp1.MVVM.ViewModel
 {
@@ -13,10 +14,39 @@ namespace WpfApp1.MVVM.ViewModel
     {
         public RelayCommand InstallTS { get; set; }
 
+        private bool _isEnabled;
+
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set
+            {
+                _isEnabled = value;
+                OnPropertyChanged(nameof(IsEnabled));
+            }
+        }
+
+        private bool _isNotEnabled;
+
+        public bool IsNotEnabled
+        {
+            get => _isNotEnabled;
+            set
+            {
+                _isNotEnabled = value;
+                OnPropertyChanged(nameof(IsNotEnabled));
+            }
+        }
+
         public HomeViewModel()
         {
+            IsEnabled = true;
+            IsNotEnabled = false;
             InstallTS = new RelayCommand(async o =>
             {
+                IsEnabled = false;
+                IsNotEnabled = true;
+
                 string tsURL = "https://files.teamspeak-services.com/pre_releases/client/5.0.0-beta77/teamspeak-client.msi";
                 string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
                 string destinationFilePath = Path.Combine(currentDirectory, "teamspeak-client.msi");
@@ -36,6 +66,8 @@ namespace WpfApp1.MVVM.ViewModel
 
                 Console.WriteLine("Complete");
 
+                IsEnabled = true;
+                IsNotEnabled = false;
             });
         }
 

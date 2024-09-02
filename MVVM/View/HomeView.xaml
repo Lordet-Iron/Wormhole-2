@@ -11,7 +11,12 @@
     <!-- We use UserControl.DataContext as the View's are different to the mainwindow -->
     <UserControl.DataContext>
         <viewModel:HomeViewModel />
+        
     </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
 
 
     <StackPanel>
@@ -63,21 +68,55 @@
                     Height="200"
                     Margin="45,0,0,0"
                     BorderThickness="0"
-                    Command="{Binding InstallTS}">        
+                    Command="{Binding InstallTS}"
+                    IsEnabled="{Binding IsEnabled}" Click="Button_Click">        
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="10" Background="{TemplateBinding Background}">
                             <Grid>
+                                <Grid Visibility="{Binding IsNotEnabled, Converter={StaticResource BoolToVis}}">
+                                    <Ellipse Width="100" Height="100" StrokeThickness="10" Stroke="Gray" Opacity="0.3"/>
+                                    <Path Width="100" Height="100" StrokeThickness="10" Stroke="DarkGray" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                        <Path.Data>
+                                            <PathGeometry>
+                                                <PathFigure StartPoint="50,0">
+                                                    <ArcSegment Point="50,100" Size="50,50" SweepDirection="Clockwise"/>
+                                                </PathFigure>
+                                            </PathGeometry>
+                                        </Path.Data>
+                                        <Path.RenderTransform>
+                                            <RotateTransform x:Name="SpinnerRotateTransform" CenterX="50" CenterY="50"/>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Grid>
+                                
                                 <StackPanel>
                                     <TextBlock Text="ARMA 3"
-                                   Foreground="White"
-                                   FontSize="28"
-                                   Margin="20,10,10,0"/>
-                                    <TextBlock Text="Install and setup&#x0a;taskforce radio"
-                                   Foreground="White"
-                                   FontSize="18"
-                                   Margin="20,10,10,0"/>
+                                        Foreground="White"
+                                        FontSize="28"
+                                        Margin="20,10,10,0"/>
+                                        <TextBlock Text="Install and setup&#x0a;taskforce radio"
+                                        Foreground="White"
+                                        FontSize="18"
+                                        Margin="20,10,10,0"/>
                                 </StackPanel>
+                                
+                                
+                                <!-- Start Animation on Loaded -->
+                                <Grid.Triggers>
+                                    <EventTrigger RoutedEvent="Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation 
+                                                    Storyboard.TargetName="SpinnerRotateTransform" 
+                                                    Storyboard.TargetProperty="Angle" 
+                                                    From="0" To="360" Duration="0:0:1" 
+                                                    RepeatBehavior="Forever"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Grid.Triggers>
+
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -167,4 +206,6 @@
             </StackPanel>
         </StackPanel>
     </StackPanel>
+    
+    
 </UserControl>
