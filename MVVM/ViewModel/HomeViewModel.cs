@@ -47,9 +47,9 @@ namespace WpfApp1.MVVM.ViewModel
                 IsEnabled = false;
                 IsNotEnabled = true;
 
-                string tsURL = "https://files.teamspeak-services.com/pre_releases/client/5.0.0-beta77/teamspeak-client.msi";
+                string tsURL = "https://files.teamspeak-services.com/releases/client/3.6.2/TeamSpeak3-Client-win64-3.6.2.exe";
                 string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string destinationFilePath = Path.Combine(currentDirectory, "teamspeak-client.msi");
+                string destinationFilePath = Path.Combine(currentDirectory, "teamspeak-client.exe");
 
                 await Download(tsURL, destinationFilePath);
 
