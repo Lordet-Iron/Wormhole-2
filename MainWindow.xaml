@@ -10,7 +10,8 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
@@ -56,6 +57,22 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding ArmaViewCommand}"/> -->
             </StackPanel>
+
+            <Grid Grid.Column="1"
+                  VerticalAlignment="Top"
+                  Height="40"
+                  Margin="20">
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <!-- Minimize button -->
+                    <Button Style="{StaticResource MinimizeButtonStyle}" Content="_" Width="40" Height="30" Margin="5" Command="{Binding Minimise}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+
+                    <!-- Close button -->
+                    <Button Style="{StaticResource MinimizeButtonStyle}" Content="X" Width="40" Height="30" Margin="5" Command="{Binding Close}"/>
+                </StackPanel>
+                
+            </Grid>
 
             <ContentControl Grid.Row="1"
                             Grid.Column="1"

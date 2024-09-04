@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Core;
+using System.Windows;
+using System.Windows.Input;
 
 namespace WpfApp1.MVVM.ViewModel
 {
@@ -14,6 +16,8 @@ namespace WpfApp1.MVVM.ViewModel
 
         public RelayCommand ArmaViewCommand { get; set; }
         public RelayCommand uwu {  get; set; }
+        public RelayCommand Close {  get; set; }
+        public RelayCommand Minimise { get; set; }
         public HomeViewModel HomeVM { get; set; }
 
         public ArmaViewModel ArmaVM { get; set; }
@@ -45,6 +49,17 @@ namespace WpfApp1.MVVM.ViewModel
             uwu = new RelayCommand(o =>
             {
                 Console.WriteLine("aergerg");
+            });
+            Close = new RelayCommand(o =>
+            {
+                Application.Current.Shutdown();
+            });
+            Minimise = new RelayCommand(o =>
+            {
+                if (o is Window window)
+                {
+                    window.WindowState = WindowState.Minimized;
+                }
             });
         }
     }

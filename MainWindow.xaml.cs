@@ -24,5 +24,18 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
+
+        // Event handler to make the window draggable
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Check if the left mouse button is pressed
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                // Make the window draggable
+                this.DragMove();
+            }
+        }
     }
+
+
 }
