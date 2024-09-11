@@ -13,6 +13,7 @@ namespace WpfApp1.MVVM.ViewModel
     internal class HomeViewModel : ObservableObject
     {
         public RelayCommand InstallTS { get; set; }
+        public RelayCommand UninstallTS { get; set; }
 
         private bool _isEnabled;
 
@@ -68,6 +69,11 @@ namespace WpfApp1.MVVM.ViewModel
 
                 IsEnabled = true;
                 IsNotEnabled = false;
+            });
+
+            UninstallTS = new RelayCommand(async o =>
+            {
+                OpenFileWithDefaultApplication("TSUninstall.exe");
             });
         }
 

@@ -50,12 +50,12 @@
                              Command="{Binding HomeViewCommand}"/>
 
 
-                <!-- <RadioButton Content="ARMA 3: Radio"
+                <RadioButton Content="ARMA 3: Radio"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding ArmaViewCommand}"/> -->
+                             Command="{Binding ArmaViewCommand}"/>
             </StackPanel>
 
             <Grid Grid.Column="1"

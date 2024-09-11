@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:WpfApp1.MVVM.View"
              xmlns:viewModel="clr-namespace:WpfApp1.MVVM.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="460" d:DesignWidth="800">
+             d:DesignHeight="460" d:DesignWidth="700">
 
     <!-- We use UserControl.DataContext as the View's are different to the mainwindow -->
     <UserControl.DataContext>
         <viewModel:HomeViewModel />
-        
+
     </UserControl.DataContext>
 
     <UserControl.Resources>
@@ -69,7 +69,7 @@
                     Margin="45,0,0,0"
                     BorderThickness="0"
                     Command="{Binding InstallTS}"
-                    IsEnabled="{Binding IsEnabled}" Click="Button_Click">        
+                    IsEnabled="{Binding IsEnabled}" Click="Button_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="10" Background="{TemplateBinding Background}">
@@ -89,19 +89,19 @@
                                         </Path.RenderTransform>
                                     </Path>
                                 </Grid>
-                                
+
                                 <StackPanel>
                                     <TextBlock Text="ARMA 3"
                                         Foreground="White"
                                         FontSize="28"
                                         Margin="20,10,10,0"/>
-                                        <TextBlock Text="Install and setup&#x0a;taskforce radio"
+                                    <TextBlock Text="Install and setup&#x0a;taskforce radio"
                                         Foreground="White"
                                         FontSize="18"
                                         Margin="20,10,10,0"/>
                                 </StackPanel>
-                                
-                                
+
+
                                 <!-- Start Animation on Loaded -->
                                 <Grid.Triggers>
                                     <EventTrigger RoutedEvent="Loaded">
@@ -135,14 +135,14 @@
 
 
         </StackPanel>
-        
+
         <StackPanel>
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="Margin" Value="15,0,0,0"/>
                 </Style>
             </StackPanel.Resources>
-            
+
             <TextBlock Text="Coming Soon"
                         Foreground="White"
                         FontSize="20"
@@ -206,6 +206,6 @@
             </StackPanel>
         </StackPanel>
     </StackPanel>
-    
-    
+
+
 </UserControl>
