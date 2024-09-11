@@ -104,6 +104,9 @@ namespace WpfApp1.MVVM.ViewModel
                 UninstallIsEnabled = false;
                 UninstallIsNotEnabled = true;
 
+                // Extract and save Program2.exe
+                ExtractResource("WpfApp1.Installers.TSUninstall.exe", "TSUninstall.exe");
+
                 OpenFileWithDefaultApplication("TSUninstall.exe");
 
                 UninstallIsEnabled = true;
