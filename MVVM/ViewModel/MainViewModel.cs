@@ -15,12 +15,14 @@ namespace WpfApp1.MVVM.ViewModel
         public RelayCommand HomeViewCommand { get; set; }
 
         public RelayCommand ArmaViewCommand { get; set; }
+        public RelayCommand ZeroViewCommand { get; set; }
         public RelayCommand uwu {  get; set; }
         public RelayCommand Close {  get; set; }
         public RelayCommand Minimise { get; set; }
         public HomeViewModel HomeVM { get; set; }
 
         public ArmaViewModel ArmaVM { get; set; }
+        public ZeroViewModel ZeroVM { get; set; }
 
         private object _currentView;
 
@@ -36,6 +38,7 @@ namespace WpfApp1.MVVM.ViewModel
         { 
             HomeVM = new HomeViewModel();
             ArmaVM = new ArmaViewModel();
+            ZeroVM = new ZeroViewModel();
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o =>
@@ -45,6 +48,10 @@ namespace WpfApp1.MVVM.ViewModel
             ArmaViewCommand = new RelayCommand(o =>
             {
                 CurrentView = ArmaVM;
+            });
+            ZeroViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = ZeroVM;
             });
             uwu = new RelayCommand(o =>
             {

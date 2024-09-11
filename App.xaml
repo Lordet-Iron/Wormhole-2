@@ -18,6 +18,11 @@
             <DataTemplate DataType="{x:Type viewModel:ArmaViewModel}">
                 <view:ArmaView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ZeroViewModel}">
+                <view:ZeroView/>
+            </DataTemplate>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

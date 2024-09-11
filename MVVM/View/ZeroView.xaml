@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="WpfApp1.MVVM.View.ZeroView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp1.MVVM.View"
+             xmlns:viewModel="clr-namespace:WpfApp1.MVVM.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="700">
+
+    <!-- We use UserControl.DataContext as the View's are different to the mainwindow -->
+    <UserControl.DataContext>
+        <viewModel:ZeroViewModel />
+
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
+
+
+    <StackPanel>
+        <TextBlock Text="ZeroTier: Connection"
+       Foreground="White"
+       FontSize="28"
+       HorizontalAlignment="Left"
+       Margin="0,0,0,20"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <Button Width="200"
+                    Height="200"
+                    BorderThickness="0"
+                    Command="{Binding InstallZeroTier}"
+                    IsEnabled="{Binding InstallIsEnabled}" Click="Button_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border CornerRadius="10" Background="{TemplateBinding Background}">
+                                <Grid>
+                                    <!-- Start Animation on Loaded -->
+                                    <Grid.Triggers>
+                                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation 
+                                    Storyboard.TargetName="SpinnerRotateTransform" 
+                                    Storyboard.TargetProperty="Angle" 
+                                    From="0" To="360" Duration="0:0:1" 
+                                    RepeatBehavior="Forever"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Grid.Triggers>
+
+                                    <Grid Visibility="{Binding InstallIsNotEnabled, Converter={StaticResource BoolToVis}}">
+                                        <Ellipse Width="100" Height="100" StrokeThickness="10" Stroke="Gray" Opacity="0.3"/>
+                                        <Path Width="100" Height="100" StrokeThickness="10" Stroke="DarkGray" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                            <Path.Data>
+                                                <PathGeometry Figures="M50,0 A50,50,0,0,1,50,100"/>
+                                            </Path.Data>
+                                            <Path.RenderTransform>
+                                                <RotateTransform x:Name="SpinnerRotateTransform" CenterX="50" CenterY="50"/>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                    </Grid>
+
+                                    <StackPanel>
+                                        <TextBlock Text="Install"
+                                                Foreground="White"
+                                                FontSize="28"
+                                                Margin="0,65,0,0"
+                                                HorizontalAlignment="Center"/>
+                                    </StackPanel>
+
+
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                    <!-- Button Background Styled with LinearGradientBrush -->
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Color="#34e600" Offset="0.0"/>
+                            <GradientStop Color="#2bbf00" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <Button Width="200"
+                    Height="200"
+                    BorderThickness="0"
+                    Command="{Binding UninstallZeroTier}"
+                    IsEnabled="{Binding UninstallIsEnabled}" Click="Button_Click" Margin="0,0,0,0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border CornerRadius="10" Background="{TemplateBinding Background}">
+                                <Grid>
+                                    <!-- Start Animation on Loaded -->
+                                    <Grid.Triggers>
+                                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation 
+                                    Storyboard.TargetName="SpinnerRotateTransform" 
+                                    Storyboard.TargetProperty="Angle" 
+                                    From="0" To="360" Duration="0:0:1" 
+                                    RepeatBehavior="Forever"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Grid.Triggers>
+
+                                    <Grid Visibility="{Binding UninstallIsNotEnabled, Converter={StaticResource BoolToVis}}">
+                                        <Ellipse Width="100" Height="100" StrokeThickness="10" Stroke="Gray" Opacity="0.3"/>
+                                        <Path Width="100" Height="100" StrokeThickness="10" Stroke="DarkGray" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                            <Path.Data>
+                                                <PathGeometry Figures="M50,0 A50,50,0,0,1,50,100"/>
+                                            </Path.Data>
+                                            <Path.RenderTransform>
+                                                <RotateTransform x:Name="SpinnerRotateTransform" CenterX="50" CenterY="50"/>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                    </Grid>
+
+                                    <StackPanel>
+                                        <TextBlock Text="Uninstall"
+                                                Foreground="White"
+                                                FontSize="28"
+                                                Margin="0,65,0,0" 
+                                                HorizontalAlignment="Center"/>
+
+                                    </StackPanel>
+
+
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                    <!-- Button Background Styled with LinearGradientBrush -->
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Color="#f13000" Offset="0.0"/>
+                            <GradientStop Color="#c82800" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+
+                </Button>
+            </StackPanel>
+        </Grid>
+
+
+
+    </StackPanel>
+</UserControl>

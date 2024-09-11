@@ -56,6 +56,13 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding ArmaViewCommand}"/>
+
+                <RadioButton Content="ZeroTier: Connection"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ZeroViewCommand}"/>
             </StackPanel>
 
             <Grid Grid.Column="1"
