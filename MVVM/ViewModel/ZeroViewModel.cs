@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace WpfApp1.MVVM.ViewModel
 {
@@ -81,7 +82,27 @@ namespace WpfApp1.MVVM.ViewModel
 
                 OpenFileWithDefaultApplication("ZeroTier One.msi");
 
-                Console.WriteLine("Complete");
+                Console.WriteLine("Zero Installed");
+
+                // Get the local path (relative to the WPF application executable)
+                string localPath = Path.Combine(Directory.GetCurrentDirectory(), "Installers.ZeroConfiguration.cs");
+
+                ProcessStartInfo processInfo = new ProcessStartInfo
+                {
+                    FileName = localPath,  // Full path to your console app
+                    Verb = "runas",  // This ensures the process runs as an admin
+                    UseShellExecute = true  // Allows the UAC prompt to appear
+                };
+
+                try
+                {
+                    Process.Start(processInfo);  // This triggers the UAC and runs the console app as admin
+                }
+                catch (System.ComponentModel.Win32Exception)
+                {
+                    // The user canceled the UAC prompt or an error occurred
+                    MessageBox.Show("The command requires administrative privileges.");
+                }
 
                 InstallIsEnabled = true;
                 InstallIsNotEnabled = false;
