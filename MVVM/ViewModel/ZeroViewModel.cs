@@ -80,13 +80,19 @@ namespace WpfApp1.MVVM.ViewModel
                 // Extract and save Program2.exe
                 ExtractResource("WpfApp1.Installers.ZeroTier One.msi", "ZeroTier One.msi");
 
-                OpenFileWithDefaultApplication("ZeroTier One.msi");
+
+
+                //OpenFileWithDefaultApplication("ZeroTier One.msi");
 
                 Console.WriteLine("Zero Installed");
 
                 // Get the local path (relative to the WPF application executable)
-                string localPath = Path.Combine(Directory.GetCurrentDirectory(), "Installers.ZeroConfiguration.cs");
-
+                ExtractResource("WpfApp1.Installers.ZeroTierConfigurator.ZeroTier Configurator.deps.json", "ZeroTier Configurator.deps.json");
+                ExtractResource("WpfApp1.Installers.ZeroTierConfigurator.ZeroTier Configurator.dll", "ZeroTier Configurator.dll");
+                ExtractResource("WpfApp1.Installers.ZeroTierConfigurator.ZeroTier Configurator.exe", "ZeroTierConfig.exe");
+                ExtractResource("WpfApp1.Installers.ZeroTierConfigurator.ZeroTier Configurator.pdb", "ZeroTier Configurator.pdb");
+                ExtractResource("WpfApp1.Installers.ZeroTierConfigurator.ZeroTier Configurator.runtimeconfig.json", "ZeroTier Configurator.runtimeconfig.json");
+                string localPath = "ZeroTierConfig.exe";
                 ProcessStartInfo processInfo = new ProcessStartInfo
                 {
                     FileName = localPath,  // Full path to your console app

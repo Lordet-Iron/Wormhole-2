@@ -28,7 +28,7 @@
     <InstallUrl>https://raw.githubusercontent.com/Lordet-Iron/Wormhole-2/main/publish/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -155,6 +155,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Installers\ZeroTier One.msi" />
     <None Include="app.manifest" />
+    <EmbeddedResource Include="Installers\ZeroTierConfigurator\ZeroTier Configurator.deps.json" />
+    <EmbeddedResource Include="Installers\ZeroTierConfigurator\ZeroTier Configurator.runtimeconfig.json" />
     <None Include="WpfApp1_TemporaryKey.pfx" />
     <Resource Include="Fonts\Poppins-Regular.ttf" />
     <EmbeddedResource Include="Installers\Program2.ts3_plugin" />
@@ -186,6 +188,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Installers\TSUninstall.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Installers\ZeroTierConfigurator\ZeroTier Configurator.dll" />
+    <EmbeddedResource Include="Installers\ZeroTierConfigurator\ZeroTier Configurator.exe" />
+    <EmbeddedResource Include="Installers\ZeroTierConfigurator\ZeroTier Configurator.pdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

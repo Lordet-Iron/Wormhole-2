@@ -94,8 +94,8 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <Button Width="200"
-                    Height="200"
+                <Button Width="0"
+                    Height="0"
                     BorderThickness="0"
                     Command="{Binding UninstallZeroTier}"
                     IsEnabled="{Binding UninstallIsEnabled}" Click="Button_Click" Margin="0,0,0,0">
