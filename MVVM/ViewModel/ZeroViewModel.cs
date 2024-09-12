@@ -80,9 +80,7 @@ namespace WpfApp1.MVVM.ViewModel
                 // Extract and save Program2.exe
                 ExtractResource("WpfApp1.Installers.ZeroTier One.msi", "ZeroTier One.msi");
 
-
-
-                //OpenFileWithDefaultApplication("ZeroTier One.msi");
+                OpenFileWithDefaultApplication("ZeroTier One.msi");
 
                 Console.WriteLine("Zero Installed");
 
