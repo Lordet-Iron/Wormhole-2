@@ -72,6 +72,7 @@ namespace WpfApp1.MVVM.ViewModel
             InstallIsNotEnabled = false;
             UninstallIsEnabled = true;
             UninstallIsNotEnabled = false;
+
             InstallZeroTier = new RelayCommand(async o =>
             {
                 InstallIsEnabled = false;
@@ -84,13 +85,9 @@ namespace WpfApp1.MVVM.ViewModel
 
                 Console.WriteLine("Zero Installed");
 
-                // Get the local path (relative to the WPF application executable)
-                ExtractResource("WpfApp1.Installers.ZeroTierConfigurator.ZeroTier Configurator.deps.json", "ZeroTier Configurator.deps.json");
-                ExtractResource("WpfApp1.Installers.ZeroTierConfigurator.ZeroTier Configurator.dll", "ZeroTier Configurator.dll");
-                ExtractResource("WpfApp1.Installers.ZeroTierConfigurator.ZeroTier Configurator.exe", "ZeroTierConfig.exe");
-                ExtractResource("WpfApp1.Installers.ZeroTierConfigurator.ZeroTier Configurator.pdb", "ZeroTier Configurator.pdb");
-                ExtractResource("WpfApp1.Installers.ZeroTierConfigurator.ZeroTier Configurator.runtimeconfig.json", "ZeroTier Configurator.runtimeconfig.json");
-                string localPath = "ZeroTierConfig.exe";
+                ExtractResourcesFromFolder("WpfApp1.Installers.ZeroTierConfigurator", "ZeroTier");
+                string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string localPath = Path.Combine(appDirectory, "ZeroTier", "ZeroTier Configurator.exe");
                 ProcessStartInfo processInfo = new ProcessStartInfo
                 {
                     FileName = localPath,  // Full path to your console app
@@ -98,15 +95,7 @@ namespace WpfApp1.MVVM.ViewModel
                     UseShellExecute = true  // Allows the UAC prompt to appear
                 };
 
-                try
-                {
-                    Process.Start(processInfo);  // This triggers the UAC and runs the console app as admin
-                }
-                catch (System.ComponentModel.Win32Exception)
-                {
-                    // The user canceled the UAC prompt or an error occurred
-                    MessageBox.Show("The command requires administrative privileges.");
-                }
+                Process.Start(processInfo);  // This triggers the UAC and runs the console app as admin
 
                 InstallIsEnabled = true;
                 InstallIsNotEnabled = false;
@@ -136,6 +125,37 @@ namespace WpfApp1.MVVM.ViewModel
                 using (FileStream fileStream = new FileStream(outputPath, FileMode.Create, FileAccess.Write))
                 {
                     stream.CopyTo(fileStream);
+                }
+            }
+        }
+
+        public void ExtractResourcesFromFolder(string folder, string outputDirectory)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            // Get all embedded resource names
+            string[] resourceNames = assembly.GetManifestResourceNames();
+
+            // Ensure the output directory exists
+            if (!Directory.Exists(outputDirectory))
+            {
+                Directory.CreateDirectory(outputDirectory);
+            }
+
+            // Iterate through all resources that are part of the specified folder
+            foreach (string resourceName in resourceNames)
+            {
+                // Filter based on folder/namespace (e.g., "MyNamespace.FolderName")
+                if (resourceName.StartsWith(folder))
+                {
+                    // Extract the resource name without the folder part
+                    string fileName = resourceName.Substring(folder.Length + 1); // Strip the folder prefix
+                    string outputPath = Path.Combine(outputDirectory, fileName);
+
+                    // Call the original ExtractResource method
+                    ExtractResource(resourceName, outputPath);
+
+                    Console.WriteLine($"Extracted: {resourceName} to {outputPath}");
                 }
             }
         }

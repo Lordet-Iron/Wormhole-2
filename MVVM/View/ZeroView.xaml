@@ -30,8 +30,22 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="0">
+            <StackPanel 
+                Grid.Column="0"
+                Grid.Row="0" RenderTransformOrigin="0.5,0.5">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-0.189"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-0.33"/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
                 <Button Width="200"
                     Height="200"
                     BorderThickness="0"
@@ -93,7 +107,9 @@
                 </Button>
             </StackPanel>
 
-            <StackPanel Grid.Column="1">
+            <StackPanel 
+                Grid.Column="1"
+                Grid.Row="0">
                 <Button Width="0"
                     Height="0"
                     BorderThickness="0"
@@ -155,6 +171,21 @@
 
                 </Button>
             </StackPanel>
+
+            <StackPanel 
+                Grid.Column="0"
+                Grid.Row="1"
+                Orientation="Horizontal"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin="10">
+                <!-- TextBlock for the word "Status" -->
+                <TextBlock Text="LordSiron was here." FontSize="20" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+                <!-- Ellipse to create a red circle -->
+                <Ellipse Width="20" Height="20" Fill="Green" VerticalAlignment="Center"/>
+            </StackPanel>
+
         </Grid>
 
 
